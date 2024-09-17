@@ -14,6 +14,7 @@ const GetExtremumValue = () => {
         //const returns = Data["mean_return"];
         //metrics["min_return"] = Math.min(metrics["min_return"], returns["0"]);
     }
+    return metrics;
 };
 
 export default GetExtremumValue;
