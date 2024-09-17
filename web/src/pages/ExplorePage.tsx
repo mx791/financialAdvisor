@@ -3,9 +3,13 @@ import SplitContainer from '../components/SplitContainer';
 import TextBox from '../components/TextBox';
 import ImageSection from '../components/ImageSection';
 import Button from '../components/Button';
-
+import GetExtremumValue from '../data/AggregatedData';
 
 const ExplorePage: FC = (): ReactElement => {
+
+    React.useEffect(() => {
+        GetExtremumValue()
+    }, [])
     return (<div>
 
         <ImageSection children={(<>

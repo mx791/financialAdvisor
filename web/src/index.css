@@ -69,14 +69,16 @@ h2 {
     border: 1px solid;
     border-left: 5px solid;
     border-color: var(--theme-color);
-    width: 80%;
+    width: 85%;
     outline: none;
 }
 
 .background-image {
-    background-image: url("https://media.istockphoto.com/id/959816846/vector/art-deco-elegant-decorative-background-pattern.jpg?s=612x612&w=0&k=20&c=HNzt0oJ8awmV7J-XNI6x7NHIKKuD5CoxuJFsb0fBQdY=");
+    background-color: var(--theme-color);
+    background-image: url("../public/texture.png");
     background-repeat: repeat;
     background-position: center;
+    color: #fff;
 }
 
 .button {
@@ -84,8 +86,9 @@ h2 {
     color: var(--light-color);
     transition: 0.5s;
     display: inline-block;
-    padding: 1em 2em 1em 2em;
+    padding: 0.5em 2em 0.5em 2em;
     border-radius: 0.5em;
+    font-size: 1.5em;
 }
 
 .button:hover {
