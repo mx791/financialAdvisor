@@ -3,20 +3,23 @@ import SplitContainer from '../components/SplitContainer';
 
 
 const Footer: FC = (): ReactElement => {
+
     return (<div className='footer'>
-        <SplitContainer
-            firstChild={(<>
-                <p>financial-advisor</p>
-                <p>2024</p>
-                <p>Tous droits réservés</p>
-            </>)}
-            secondChild={(<>
-                <p>A propos du créateur:</p>
-                <p>Charles LAURIOZ</p>
-                <p>Consultant data</p>
-                <p>Paris</p>
-            </>)}
-        />
+        <div className='container'>
+            <SplitContainer
+                firstChild={(<>
+                    <p><b>financial-advisor</b></p>
+                    <p>2024</p>
+                    <p>Tous droits réservés</p>
+                </>)}
+                secondChild={(<>
+                    <p><b>A propos du créateur:</b></p>
+                    <p>Charles LAURIOZ</p>
+                    <p>Consultant data</p>
+                    <p>Paris</p>
+                </>)}
+            />
+        </div>
     </div>)
 };
 

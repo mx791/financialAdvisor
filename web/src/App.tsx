@@ -10,13 +10,15 @@ function App() {
 
   const [page, setPage] = React.useState("MAIN");
   const changePage = (i: String) => setPage(i + "");
+  const implemented = ["MAIN", "EXPLORE"];
 
   return (
     <div className="App">
       <Menu setActivePage={changePage}/>
       { page === "MAIN" ? (<LandingPage />) : "" }
       { page === "EXPLORE" ? (<ExplorePage />) : "" }
-      { page !== "MAIN" ? (<NonePage />) : "" }
+      { !implemented.includes(page) ? (<NonePage />) : "" }
+      <div className='space'></div>
       <Footer />
     </div>
   );
