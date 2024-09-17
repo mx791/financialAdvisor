@@ -21,12 +21,12 @@ body {
 }
 
 .menu {
-    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-content: center;
     border-bottom: 1px solid;
     border-color: var(--theme-color);
+    width: 100%;
 }
 
 .menu-item {

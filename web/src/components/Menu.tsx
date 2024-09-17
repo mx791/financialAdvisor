@@ -7,8 +7,7 @@ interface MenuProps {
 const Menu: FC<MenuProps> = (props: MenuProps): ReactElement => {
 
     const secondStyle=  {
-        display: "flex",
-        width: "100%"
+        display: "flex"
     }
 
     return (<div className='menu'>
