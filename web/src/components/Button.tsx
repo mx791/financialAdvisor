@@ -5,7 +5,6 @@ interface ButtonProps {
 }
 
 const Button: FC<ButtonProps> = (props: ButtonProps): ReactElement => {
-    
     return (<div className='button'>
         {props.text}
     </div>)

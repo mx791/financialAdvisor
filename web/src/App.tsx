@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <Menu setActivePage={changePage}/>
-      <div style={{minHeight: "90vh"}}>
+      <div style={{minHeight: "80vh"}}>
         { page === "MAIN" ? (<LandingPage />) : "" }
         { page === "EXPLORE" ? (<ExplorePage />) : "" }
         { !implemented.includes(page) ? (<NonePage />) : "" }
