@@ -21,6 +21,9 @@ const ExplorePage: FC = (): ReactElement => {
                 firstChild={(<TextBox name="Rendement minimal (%)" type="number" />)}
                 secondChild={(<TextBox name="Rendement maximal (%)" type="number" />)}
             />
+
+            <h2>Historique</h2>
+            <TextBox name="Nombre de mois minimal d'historique (%)" type="number" />
         </div>
     </div>)
 };

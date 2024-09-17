@@ -1,6 +1,4 @@
 import React, { FC, ReactElement } from 'react';
-import SplitContainer from '../components/SplitContainer';
-import TextBox from '../components/TextBox';
 
 interface ImageSectionProps {
     children: ReactElement,
