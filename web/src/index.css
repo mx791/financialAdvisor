@@ -33,6 +33,8 @@ body {
     line-height: normal;
     border-bottom: 3px solid;
     border-color: transparent;
+    cursor: pointer;
+    transition: 0.5s;
 }
 
 .menu-item:hover {
