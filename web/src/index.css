@@ -27,6 +27,7 @@ body {
     align-content: center;
     border-bottom: 1px solid;
     border-color: var(--theme-color);
+    position: fixed;
 }
 
 .menu-item {
@@ -67,4 +68,10 @@ h2 {
     border-color: var(--theme-color);
     width: 80%;
     outline: none;
+}
+
+.background-image {
+    background-image: url("https://media.istockphoto.com/id/959816846/vector/art-deco-elegant-decorative-background-pattern.jpg?s=612x612&w=0&k=20&c=HNzt0oJ8awmV7J-XNI6x7NHIKKuD5CoxuJFsb0fBQdY=");
+    background-repeat: repeat;
+    background-position: center;
 }

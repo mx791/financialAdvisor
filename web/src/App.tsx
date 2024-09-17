@@ -19,11 +19,10 @@ function App() {
   return (
     <div className="App">
       <Menu setActivePage={changePage}/>
-      <div style={{minHeight: "100vh"}}>
+      <div style={{minHeight: "90vh"}}>
         { page === "MAIN" ? (<LandingPage />) : "" }
         { page === "EXPLORE" ? (<ExplorePage />) : "" }
         { !implemented.includes(page) ? (<NonePage />) : "" }
-        <div className='space'></div>
       </div>
       <Footer />
     </div>
