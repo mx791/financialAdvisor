@@ -27,7 +27,6 @@ body {
     align-content: center;
     border-bottom: 1px solid;
     border-color: var(--theme-color);
-    position: fixed;
 }
 
 .menu-item {

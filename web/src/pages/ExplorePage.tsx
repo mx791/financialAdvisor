@@ -8,8 +8,10 @@ const ExplorePage: FC = (): ReactElement => {
     return (<div>
 
         <ImageSection children={(<>
+            <div className='space'></div>
             <h1>Exploration des titres</h1>
             <p>Partez à la recherche des pépites de notre base de données</p>
+            <div className='space'></div>
         </>)} />
 
         <div className='space'></div>
@@ -22,8 +24,15 @@ const ExplorePage: FC = (): ReactElement => {
                 secondChild={(<TextBox name="Rendement maximal (%)" type="number" />)}
             />
 
+
+            <h2>Volatilité</h2>
+            <SplitContainer
+                firstChild={(<TextBox name="Volatilité minimal (%)" type="number" />)}
+                secondChild={(<TextBox name="Volatilité maximal (%)" type="number" />)}
+            />
+
             <h2>Historique</h2>
-            <TextBox name="Nombre de mois minimal d'historique (%)" type="number" />
+            <TextBox name="Nombre de mois minimal d'historique" type="number" />
         </div>
     </div>)
 };
