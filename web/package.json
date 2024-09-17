@@ -1,5 +1,6 @@
 {
   "name": "web",
+  "homepage": "https://mx791.github.io/financialAdvisor/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

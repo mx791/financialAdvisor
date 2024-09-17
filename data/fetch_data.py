@@ -28,6 +28,8 @@ if __name__ == "__main__":
         *pd.read_csv("./funds.csv")["link"].values,
     ]
 
+    print(f"{len(df)} lines to fetch")
+
     for s in tqdm.tqdm(df):
         try:
             data = fetch(s)
