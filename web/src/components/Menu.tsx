@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 
-const Menu: FC = ({}): ReactElement => {
+const Menu: FC = (): ReactElement => {
     return (<div className='container menu'>
         <div className='menu-item'>LOGO</div>
         <div className='menu-item'>Accueil</div>
