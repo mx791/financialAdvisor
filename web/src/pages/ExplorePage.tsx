@@ -34,6 +34,9 @@ const ExplorePage: FC = (): ReactElement => {
             <h2>Historique</h2>
             <TextBox name="Nombre de mois minimal d'historique" type="number" />
         </div>
+
+        <div className='space'></div>
+        
     </div>)
 };
 
