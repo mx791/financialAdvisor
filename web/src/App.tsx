@@ -12,6 +12,10 @@ function App() {
   const changePage = (i: String) => setPage(i + "");
   const implemented = ["MAIN", "EXPLORE"];
 
+  React.useEffect(() => {
+    document.title = "Financial Advisor"
+  }, []);
+
   return (
     <div className="App">
       <Menu setActivePage={changePage}/>

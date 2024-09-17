@@ -33,7 +33,7 @@ body {
     text-align: center;
     vertical-align: middle;
     line-height: normal;
-    border-bottom: 3px solid;
+    border-bottom: 5px solid;
     border-color: transparent;
     cursor: pointer;
     transition: 0.5s;
@@ -53,13 +53,16 @@ body {
 }
 
 h2 {
+    border-bottom: 5px solid;
     border-color: var(--theme-color);
-    border-bottom: 3px solid;
 }
 
 .textbox {
-    padding: 0.5em;
-    border: 1px 1px 1px 5px solid;
+    padding: 1em;
+    font-size: 1.5em;
+    border: 1px solid;
+    border-left: 5px;
     border-color: var(--theme-color);
     width: 80%;
+    outline: none;
 }
