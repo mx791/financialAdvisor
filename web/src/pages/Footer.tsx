@@ -6,6 +6,7 @@ const Footer: FC = (): ReactElement => {
 
     return (<div className='footer'>
         <div className='container'>
+            <div className='sub-space'></div>
             <SplitContainer
                 firstChild={(<>
                     <p><b>financial-advisor</b></p>
@@ -20,6 +21,7 @@ const Footer: FC = (): ReactElement => {
                 </>)}
             />
         </div>
+        <div className='sub-space'></div>
     </div>)
 };
 

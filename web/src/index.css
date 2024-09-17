@@ -78,3 +78,13 @@ h2 {
     background-repeat: repeat;
     background-position: center;
 }
+
+.button {
+    background-color: var(--theme-color);
+    color: var(--light-color);
+    transition: 0.5s;
+}
+
+.button:hover {
+    background-color: var(--light-theme-color);
+}

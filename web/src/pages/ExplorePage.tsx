@@ -2,6 +2,7 @@ import React, { FC, ReactElement } from 'react';
 import SplitContainer from '../components/SplitContainer';
 import TextBox from '../components/TextBox';
 import ImageSection from '../components/ImageSection';
+import Button from '../components/Button';
 
 
 const ExplorePage: FC = (): ReactElement => {
@@ -37,6 +38,11 @@ const ExplorePage: FC = (): ReactElement => {
             <TextBox name="Nombre de mois minimal d'historique" type="number" />
         </div>
 
+        <div className='space'></div>
+        
+        <center>
+            <Button text='Filtrer' />
+        </center>
         <div className='space'></div>
 
     </div>)
