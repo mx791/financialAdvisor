@@ -1,5 +1,7 @@
 :root {
     --theme-color: #01697e;
+    --light-theme-color: #00a7c8;
+    --light-color: #f3f7f7;
   }
 
 body {
@@ -43,4 +45,9 @@ body {
 
 .space {
     margin-top: 5em;
+}
+
+.footer {
+    background-color: var(--theme-color);
+    color: var(--light-color);
 }

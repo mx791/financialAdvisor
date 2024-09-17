@@ -3,6 +3,8 @@ import Menu from './components/Menu';
 import LandingPage from './pages/LandingPage';
 import NonePage from './pages/NonePage';
 import ExplorePage from './pages/ExplorePage';
+import Footer from './pages/Footer';
+
 
 function App() {
 
@@ -15,6 +17,7 @@ function App() {
       { page === "MAIN" ? (<LandingPage />) : "" }
       { page === "EXPLORE" ? (<ExplorePage />) : "" }
       { page !== "MAIN" ? (<NonePage />) : "" }
+      <Footer />
     </div>
   );
 }
