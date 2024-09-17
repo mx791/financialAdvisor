@@ -14,7 +14,7 @@ const ExplorePage: FC = (): ReactElement => {
             <div className='space'></div>
         </>)} />
 
-        <div className='space'></div>
+        <div className='sub-space'></div>
         <div className='container'>
 
             <div className='space'></div>
@@ -23,6 +23,7 @@ const ExplorePage: FC = (): ReactElement => {
                 firstChild={(<TextBox name="Rendement minimal (%)" type="number" />)}
                 secondChild={(<TextBox name="Rendement maximal (%)" type="number" />)}
             />
+            <div className='sub-space'></div>
 
 
             <h2>Volatilité</h2>
@@ -30,13 +31,14 @@ const ExplorePage: FC = (): ReactElement => {
                 firstChild={(<TextBox name="Volatilité minimal (%)" type="number" />)}
                 secondChild={(<TextBox name="Volatilité maximal (%)" type="number" />)}
             />
+            <div className='sub-space'></div>
 
             <h2>Historique</h2>
             <TextBox name="Nombre de mois minimal d'historique" type="number" />
         </div>
 
         <div className='space'></div>
-        
+
     </div>)
 };
 

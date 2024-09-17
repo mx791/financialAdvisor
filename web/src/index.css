@@ -49,6 +49,10 @@ body {
     height: 5em;
 }
 
+.sub-space {
+    height: 2em;
+}
+
 .footer {
     background-color: var(--theme-color);
     color: var(--light-color);
