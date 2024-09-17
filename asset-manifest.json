@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/financialAdvisor/static/css/main.083b10f6.css",
-    "main.js": "/financialAdvisor/static/js/main.82d41158.js",
+    "main.css": "/financialAdvisor/static/css/main.b94c9a97.css",
+    "main.js": "/financialAdvisor/static/js/main.2e411cec.js",
     "static/js/453.c5eaf93b.chunk.js": "/financialAdvisor/static/js/453.c5eaf93b.chunk.js",
     "index.html": "/financialAdvisor/index.html",
-    "main.083b10f6.css.map": "/financialAdvisor/static/css/main.083b10f6.css.map",
-    "main.82d41158.js.map": "/financialAdvisor/static/js/main.82d41158.js.map",
+    "main.b94c9a97.css.map": "/financialAdvisor/static/css/main.b94c9a97.css.map",
+    "main.2e411cec.js.map": "/financialAdvisor/static/js/main.2e411cec.js.map",
     "453.c5eaf93b.chunk.js.map": "/financialAdvisor/static/js/453.c5eaf93b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.083b10f6.css",
-    "static/js/main.82d41158.js"
+    "static/css/main.b94c9a97.css",
+    "static/js/main.2e411cec.js"
   ]
 }
