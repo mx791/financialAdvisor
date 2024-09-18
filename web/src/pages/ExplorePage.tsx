@@ -29,15 +29,16 @@ const ExplorePage: FC = (): ReactElement => {
     }
 
     const options = {
-        // Material design options
         chart: {
-          title: "Students' Final Grades",
+          title: "Rendement en fonction du risque",
           subtitle: "based on hours studied",
         },
         axes: {
-          x: {
-            0: { side: "top" },
-          },
+            x: {
+                0: { side: "bottom" },
+            }, y: {
+                0: { side: "left" },
+            },
         },
       };
 
@@ -73,24 +74,24 @@ const ExplorePage: FC = (): ReactElement => {
             />
             <div className='sub-space'></div>
 
-        </div>
+            <div className='space'></div>
+            
+            <center>
+                <Button text='Filtrer' onClick={filterData}/>
+            </center>
+            <div className='space'></div>
 
-        <div className='space'></div>
+            <Chart
+                chartType="Scatter"
+                width="80%"
+                height="500px"
+                data={data}
+                options={options}
+            />
+
+            <div className='space'></div>
         
-        <center>
-            <Button text='Filtrer' onClick={filterData}/>
-        </center>
-        <div className='space'></div>
-
-        <Chart
-            chartType="Scatter"
-            width="80%"
-            height="400px"
-            data={data}
-            options={options}
-        />
-
-        <div className='space'></div>
+        </div>
 
     </div>)
 };
