@@ -54,8 +54,6 @@ const ExplorePage: FC = (): ReactElement => {
                 secondChild={(<TextBox name="Volatilité maximal (%)" type="number" />)}
             />
             <div className='sub-space'></div>
-
-            <div className='space'></div>
             
             <center>
                 <Button text='Filtrer' onClick={filterData}/>
@@ -70,10 +68,12 @@ const ExplorePage: FC = (): ReactElement => {
                     mode: 'markers',
                     marker: {color: Constants.lightThemeColor},
                     text: data.map(itm => itm.name),
+                    hoverinfo: "text"
                 }]}
                 layout={{
-                    width: 1000, height: 500, title: 'Diagramme risk/return',
-                    xaxis: {title: "Volatilité %"}
+                    width: Math.floor(window.innerWidth*0.8), height: 500, title: 'Diagramme risk/return',
+                    xaxis: {title: "Volatilité %"},
+                    yaxis: {title: "Rendement moyen annualisé %"},
                 }}
             />
 
