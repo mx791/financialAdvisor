@@ -3,10 +3,10 @@ import SplitContainer from '../components/SplitContainer';
 import TextBox from '../components/TextBox';
 import ImageSection from '../components/ImageSection';
 import Button from '../components/Button';
-import AggregatedData from '../data/AggregatedData';
+import AggregatedData, { Instrument } from '../data/AggregatedData';
 import SelectInput from '../components/SelectInput';
-import { Chart } from "react-google-charts";
-
+import Plot from 'react-plotly.js';
+import Constants from '../Constants';
 
 const ExplorePage: FC = (): ReactElement => {
 
@@ -16,31 +16,12 @@ const ExplorePage: FC = (): ReactElement => {
         setYears(AggregatedData.GetYears());
     }, []);
 
-    const defaultData : any[][] = [];
+    const defaultData : Instrument[] = [];
     const [data, setData] = React.useState(defaultData);
 
     const filterData = () => {
-        const out: any[][] = [["Risk", "Return"]];
-        AggregatedData.GetData("2018").map((itm) => {
-            out.push([itm.volatility, itm.mean_return]);
-            return 0;
-        })
-        setData(out);
+        setData(AggregatedData.GetData("2018"));
     }
-
-    const options = {
-        chart: {
-          title: "Rendement en fonction du risque",
-          subtitle: "based on hours studied",
-        },
-        axes: {
-            x: {
-                0: { side: "bottom" },
-            }, y: {
-                0: { side: "left" },
-            },
-        },
-      };
 
     return (<div>
         <ImageSection children={(<>
@@ -81,12 +62,18 @@ const ExplorePage: FC = (): ReactElement => {
             </center>
             <div className='space'></div>
 
-            <Chart
-                chartType="Scatter"
-                width="100%"
-                height="500px"
-                data={data}
-                options={options}
+            <Plot
+                data={[{
+                    x: data.map(itm => itm.volatility),
+                    y: data.map(itm => itm.mean_return),
+                    type: 'scatter',
+                    mode: 'markers',
+                    marker: {color: Constants.lightThemeColor},
+                }]}
+                layout={{
+                    width: 500, height: 500, title: 'Diagramme risk/return',
+                    "xaxis.title": "Volatilité"
+                }}
             />
 
             <div className='space'></div>
