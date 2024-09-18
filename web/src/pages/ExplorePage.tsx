@@ -5,6 +5,8 @@ import ImageSection from '../components/ImageSection';
 import Button from '../components/Button';
 import AggregatedData from '../data/AggregatedData';
 import SelectInput from '../components/SelectInput';
+import { Chart } from "react-google-charts";
+
 
 const ExplorePage: FC = (): ReactElement => {
 
@@ -12,8 +14,32 @@ const ExplorePage: FC = (): ReactElement => {
     const [years, setYears] = React.useState(defaultYears);
     React.useEffect(() => {
         setYears(AggregatedData.GetYears());
-        console.log(AggregatedData.GetYears())
     }, []);
+
+    const defaultData : any[][] = [];
+    const [data, setData] = React.useState(defaultData);
+
+    const filterData = () => {
+        const out: any[][] = [["Risk", "Return"]];
+        AggregatedData.GetData("2018").map((itm) => {
+            out.push([itm.volatility, itm.volatility]);
+            return 0;
+        })
+        setData(out);
+    }
+
+    const options = {
+        // Material design options
+        chart: {
+          title: "Students' Final Grades",
+          subtitle: "based on hours studied",
+        },
+        axes: {
+          x: {
+            0: { side: "top" },
+          },
+        },
+      };
 
     return (<div>
         <ImageSection children={(<>
@@ -52,8 +78,18 @@ const ExplorePage: FC = (): ReactElement => {
         <div className='space'></div>
         
         <center>
-            <Button text='Filtrer' />
+            <Button text='Filtrer' onClick={filterData}/>
         </center>
+        <div className='space'></div>
+
+        <Chart
+            chartType="Scatter"
+            width="80%"
+            height="400px"
+            data={data}
+            options={options}
+        />
+
         <div className='space'></div>
 
     </div>)
