@@ -36,8 +36,8 @@ const fcs = {
                 continue
             }
 
-            const vol = Data["vol_" + i as keyof IData][i];
-            const ret = Data["vol_" + i as keyof IData][i];
+            const vol = Data["vol_" + maxYear as keyof IData][i];
+            const ret = Data["vol_" + maxYear as keyof IData][i];
             if (vol < minVolatility || vol > maxVolatility) {
                 continue;
             }
