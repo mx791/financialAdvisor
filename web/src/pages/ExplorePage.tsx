@@ -8,18 +8,23 @@ import SelectInput from '../components/SelectInput';
 import Plot from 'react-plotly.js';
 import Constants from '../Constants';
 
+
 const ExplorePage: FC = (): ReactElement => {
 
     const [years] = React.useState(AggregatedData.GetYears());
-
     const defaultData : Instrument[] = [];
     const [data, setData] = React.useState(defaultData);
+    const [year, setYear] = React.useState(years[0]);
+    const [minVolumme, setMinVolumme] = React.useState(0);
+    const [minReturn, setMinReturn] = React.useState(0);
+    const [maxReturn, setMaxReturn] = React.useState(0);
+    const [minVolatility, setMinVolatility] = React.useState(0);
+    const [maxVolatility, setMaxVolatility] = React.useState(0);
+    
 
     const filterData = () => {
-        setData(AggregatedData.GetData("2018"));
+        setData(AggregatedData.GetData(year));
     };
-
-    const [year, setYear] = React.useState(years[0]);
 
     return (<div>
         <ImageSection children={(<>
@@ -43,20 +48,45 @@ const ExplorePage: FC = (): ReactElement => {
             <div className='sub-space'></div>
 
             <h2>Volumme</h2>
-            <TextBox name="Volumme minimal" type="number" />
+            <TextBox
+                name="Volumme minimal"
+                type="number"
+                value={String(minVolumme)}
+                setValue={(v) => setMinVolumme(parseFloat(v))}
+            />
             <div className='sub-space'></div>
 
             <h2>Rendement</h2>
             <SplitContainer
-                firstChild={(<TextBox name="Rendement minimal (%)" type="number" />)}
-                secondChild={(<TextBox name="Rendement maximal (%)" type="number" />)}
+                firstChild={(<TextBox
+                    name="Rendement minimal (%)"
+                    type="number"
+                    value={String(minReturn)}
+                    setValue={(v) => setMinReturn(parseFloat(v))}
+                />)}
+                secondChild={(<TextBox
+                    name="Rendement maximal (%)"
+                    type="number"
+                    value={String(maxReturn)}
+                    setValue={(v) => setMaxReturn(parseFloat(v))}
+                />)}
             />
             <div className='sub-space'></div>
 
             <h2>Volatilité</h2>
             <SplitContainer
-                firstChild={(<TextBox name="Volatilité minimal (%)" type="number" />)}
-                secondChild={(<TextBox name="Volatilité maximal (%)" type="number" />)}
+                firstChild={(<TextBox
+                    name="Volatilité minimal (%)"
+                    type="number"
+                    value={String(minVolatility)}
+                    setValue={(v) => setMinVolatility(parseFloat(v))}
+                />)}
+                secondChild={(<TextBox
+                    name="Volatilité maximal (%)"
+                    type="number"
+                    value={String(maxVolatility)}
+                    setValue={(v) => setMaxVolatility(parseFloat(v))}
+                />)}
             />
             <div className='sub-space'></div>
             
@@ -66,7 +96,6 @@ const ExplorePage: FC = (): ReactElement => {
             <div className='space'></div>
 
             { data.length !== 0 ? (<p>{data.length} items</p>) : "" }
-
             { data.length !== 0 ? (
             <Plot
                 data={[{
@@ -76,7 +105,7 @@ const ExplorePage: FC = (): ReactElement => {
                     mode: 'markers',
                     marker: {
                         color: Constants.themeColor,
-                        size: data.map(itm => 5 + 2*Math.log(1+itm.volumme))
+                        size: data.map(itm => 5 + Math.log(1+itm.volumme))
                     },
                     text: data.map(itm => itm.name),
                     hoverinfo: "text"
@@ -88,11 +117,8 @@ const ExplorePage: FC = (): ReactElement => {
                 }}
             />) : "" }
 
-
             <div className='space'></div>
-        
         </div>
-
     </div>)
 };
 
