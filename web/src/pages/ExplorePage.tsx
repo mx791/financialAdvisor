@@ -3,13 +3,13 @@ import SplitContainer from '../components/SplitContainer';
 import TextBox from '../components/TextBox';
 import ImageSection from '../components/ImageSection';
 import Button from '../components/Button';
-import GetExtremumValue from '../data/AggregatedData';
+import AggregatedData from '../data/AggregatedData';
+import SelectInput from '../components/SelectInput';
 
 const ExplorePage: FC = (): ReactElement => {
 
-    React.useEffect(() => {
-        GetExtremumValue()
-    }, [])
+    const [years] = React.useState(AggregatedData.GetYears());
+
     return (<div>
 
         <ImageSection children={(<>
@@ -23,6 +23,11 @@ const ExplorePage: FC = (): ReactElement => {
         <div className='container'>
 
             <div className='space'></div>
+            <h2>Historique</h2>
+            <SelectInput name='Année minimale' options={years} />
+            <div className='sub-space'></div>
+
+
             <h2>Rendement</h2>
             <SplitContainer
                 firstChild={(<TextBox name="Rendement minimal (%)" type="number" />)}
@@ -38,8 +43,6 @@ const ExplorePage: FC = (): ReactElement => {
             />
             <div className='sub-space'></div>
 
-            <h2>Historique</h2>
-            <TextBox name="Nombre de mois minimal d'historique" type="number" />
         </div>
 
         <div className='space'></div>
