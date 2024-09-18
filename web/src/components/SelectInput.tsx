@@ -6,7 +6,7 @@ interface SelectProps {
 }
 
 const SelectInput: FC<SelectProps> = (props: SelectProps): ReactElement => {
-    return (<select>
+    return (<select className='textbox'>
         { props.options.map((itm) => (
             <option>{itm}</option>
         ))}

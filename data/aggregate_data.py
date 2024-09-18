@@ -4,7 +4,7 @@ import json
 
 
 def get_returns(data: np.array) -> np.array:
-    data = [data[i] if data[i] > 0 else data[i-1] for i in range(len(data))]
+    data = np.array([data[i] if data[i] > 0 else data[i-1] for i in range(len(data))])
     return data[1:] / data[:-1] - 1.0
 
 
@@ -45,8 +45,8 @@ if __name__ == "__main__":
                     returns = get_returns(data_year_filtered["close"].values)
                     mean_returns[year].append(np.mean(returns) * DAYS)
                     stds[year].append(np.std(returns) * np.sqrt(DAYS))
-        except:
-            pass
+        except Exception as e:
+            print(e)
     
     obj = {
         "name": names,
