@@ -69,10 +69,11 @@ const ExplorePage: FC = (): ReactElement => {
                     type: 'scatter',
                     mode: 'markers',
                     marker: {color: Constants.lightThemeColor},
+                    text: data.map(itm => itm.name),
                 }]}
                 layout={{
-                    width: 500, height: 500, title: 'Diagramme risk/return',
-                    "xaxis.title": "Volatilité"
+                    width: 1000, height: 500, title: 'Diagramme risk/return',
+                    xaxis: {title: "Volatilité %"}
                 }}
             />
 
