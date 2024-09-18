@@ -22,7 +22,7 @@ const ExplorePage: FC = (): ReactElement => {
     const filterData = () => {
         const out: any[][] = [["Risk", "Return"]];
         AggregatedData.GetData("2018").map((itm) => {
-            out.push([itm.volatility, itm.volatility]);
+            out.push([itm.volatility, itm.mean_return]);
             return 0;
         })
         setData(out);
@@ -83,7 +83,7 @@ const ExplorePage: FC = (): ReactElement => {
 
             <Chart
                 chartType="Scatter"
-                width="80%"
+                width="100%"
                 height="500px"
                 data={data}
                 options={options}
