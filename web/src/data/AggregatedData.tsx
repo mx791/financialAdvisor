@@ -5,6 +5,7 @@ export type Instrument = {
     identifier: string,
     mean_return: number,
     volatility: number,
+    volumme: number
 }
 
 const fcs = {
@@ -27,6 +28,7 @@ const fcs = {
                     identifier: Data["symbols"][i],
                     mean_return: Data["return_2018"][i]*100,
                     volatility: Data["vol_2018"][i]*100,
+                    volumme: Data["volumme"][i],
                 })
             }
         }

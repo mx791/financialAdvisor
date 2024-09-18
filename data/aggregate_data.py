@@ -15,7 +15,7 @@ if __name__ == "__main__":
         pd.read_csv("./funds.csv")
     ])
 
-    names, symbols, number_of_values, first_years = [], [], [], []
+    names, symbols, number_of_values, first_years, mean_volumme = [], [], [], [], []
     mean_returns, stds = {i: [] for i in range(2014, 2025)}, {i: [] for i in range(2014, 2025)}
 
     for i in range(len(df)):
@@ -30,6 +30,7 @@ if __name__ == "__main__":
 
             first_year = data["date"].dt.year.min()
             last_year = data["date"].dt.year.max()
+            mean_volumme.append(data["volumme"].mean())
 
             names.append(name)
             symbols.append(ids)
@@ -60,7 +61,8 @@ if __name__ == "__main__":
         "symbols": symbols,
         "number_of_values": number_of_values,
         "first_year": first_years,
-        "last_year": last_years,
+        #"last_year": last_years,
+        "volumme": mean_volumme,
         **{f"return_{col}": mean_returns[col] for col in mean_returns},
         **{f"vol_{col}": stds[col] for col in stds},
     }

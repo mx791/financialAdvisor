@@ -60,13 +60,17 @@ const ExplorePage: FC = (): ReactElement => {
             </center>
             <div className='space'></div>
 
+            { data.length !== 0 ? (
             <Plot
                 data={[{
                     x: data.map(itm => itm.volatility),
                     y: data.map(itm => itm.mean_return),
                     type: 'scatter',
                     mode: 'markers',
-                    marker: {color: Constants.lightThemeColor},
+                    marker: {
+                        color: Constants.themeColor,
+                        size: data.map(itm => 1 + Math.log(1+itm.volumme))
+                    },
                     text: data.map(itm => itm.name),
                     hoverinfo: "text"
                 }]}
@@ -75,7 +79,8 @@ const ExplorePage: FC = (): ReactElement => {
                     xaxis: {title: "Volatilité %"},
                     yaxis: {title: "Rendement moyen annualisé %"},
                 }}
-            />
+            />) : "" }
+
 
             <div className='space'></div>
         
