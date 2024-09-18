@@ -35,7 +35,7 @@ if __name__ == "__main__":
             names.append(name)
             symbols.append(ids)
             number_of_values.append(len(data))
-            first_years.append(f"{first_year}")
+            first_years.append(int(first_year))
 
             DAYS = 252
 

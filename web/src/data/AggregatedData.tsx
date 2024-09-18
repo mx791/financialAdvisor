@@ -18,7 +18,7 @@ const fcs = {
     GetYears: () : string[] => {
         return Data["first_year"].sort().filter(
             (el,i,a) => i === a.indexOf(el)
-        )
+        ).map(itm => itm + "")
     },
 
     GetData: (
@@ -28,7 +28,7 @@ const fcs = {
     ) : Instrument[] => {
         const out: Instrument[] = [];
         for (let i=0; i<Data["name"].length; i++) {
-            if (parseInt(Data["first_year"][i]) > parseInt(maxYear)) {
+            if (Data["first_year"][i] > parseInt(maxYear)) {
                 continue
             }
 
@@ -36,15 +36,14 @@ const fcs = {
                 continue
             }
 
-            const vol = Data["vol_" + maxYear as keyof IData][i];
-            const ret = Data["vol_" + maxYear as keyof IData][i];
+            const vol = Data["vol_" + maxYear as keyof IData][i] * 100;
+            const ret = Data["return_" + maxYear as keyof IData][i] * 100;
             if (vol < minVolatility || vol > maxVolatility) {
                 continue;
             }
             if (ret < minReturn || ret > maxReturn) {
                 continue;
             }
-            
 
             out.push({
                 name: Data["name"][i],
