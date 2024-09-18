@@ -8,6 +8,11 @@ export type Instrument = {
     volumme: number
 }
 
+interface IData {
+    return_2014: number[]
+}
+
+
 const fcs = {
 
     GetYears: () : string[] => {
@@ -16,20 +21,36 @@ const fcs = {
         )
     },
 
-    GetData: (max_year: string) : Instrument[] => {
+    GetData: (
+        maxYear: string, minVolumme: number,
+        minReturn: number, maxReturn: number,
+        minVolatility: number, maxVolatility: number,
+    ) : Instrument[] => {
         const out: Instrument[] = [];
         for (let i=0; i<Data["name"].length; i++) {
-            if (parseInt(Data["first_year"][i]) > parseInt(max_year)) {
+            if (parseInt(Data["first_year"][i]) > parseInt(maxYear)) {
                 continue
             }
-            if (Data["vol_2018"][i] > 1.5) {
+
+            if (Data["volumme"][i] < minVolumme) {
+                continue
+            }
+
+            const vol = Data["vol_" + i as keyof IData][i];
+            const ret = Data["vol_" + i as keyof IData][i];
+            if (vol < minVolatility || vol > maxVolatility) {
                 continue;
             }
+            if (ret < minReturn || ret > maxReturn) {
+                continue;
+            }
+            
+
             out.push({
                 name: Data["name"][i],
                 identifier: Data["symbols"][i],
-                mean_return: Data["return_2018"][i]*100,
-                volatility: Data["vol_2018"][i]*100,
+                mean_return: Data["return_" + maxYear as keyof IData][i]*100,
+                volatility: Data["vol_" + maxYear as keyof IData][i]*100,
                 volumme: Data["volumme"][i],
             });
         }

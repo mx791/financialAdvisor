@@ -16,14 +16,16 @@ const ExplorePage: FC = (): ReactElement => {
     const [data, setData] = React.useState(defaultData);
     const [year, setYear] = React.useState(years[0]);
     const [minVolumme, setMinVolumme] = React.useState(0);
-    const [minReturn, setMinReturn] = React.useState(0);
-    const [maxReturn, setMaxReturn] = React.useState(0);
+    const [minReturn, setMinReturn] = React.useState(-100);
+    const [maxReturn, setMaxReturn] = React.useState(100);
     const [minVolatility, setMinVolatility] = React.useState(0);
-    const [maxVolatility, setMaxVolatility] = React.useState(0);
+    const [maxVolatility, setMaxVolatility] = React.useState(100);
     
 
     const filterData = () => {
-        setData(AggregatedData.GetData(year));
+        setData(AggregatedData.GetData(
+            year, minVolumme, minReturn, maxReturn, minVolatility, maxVolatility
+        ));
     };
 
     return (<div>
