@@ -4,8 +4,8 @@ import json
 
 
 def get_returns(data: np.array) -> np.array:
-    data = np.array([data[i] if data[i] > 0 else data[i-1] for i in range(len(data))])
-    return data[1:] / data[:-1] - 1.0
+    returns = data[1:] / data[:-1] - 1.0
+    return returns[~np.isnan(returns)]
 
 
 if __name__ == "__main__":
@@ -25,9 +25,10 @@ if __name__ == "__main__":
             data = pd.read_csv(f"./out/{ids}.csv", index_col=0)
             data = data.dropna()
             data["date"] = pd.to_datetime(data["date"])
+            if len(data) < 100:
+                continue
 
             first_year = data["date"].dt.year.min()
-            returns = get_returns(data["close"].values)
 
             names.append(name)
             symbols.append(ids)
@@ -40,8 +41,13 @@ if __name__ == "__main__":
                 if year < first_year:
                     mean_returns[year].append(0)
                     stds[year].append(0)
+
                 else:
                     data_year_filtered = data[data["date"].dt.year >= year]
+                    if len(data_year_filtered) == 0:
+                        mean_returns[year].append(0)
+                        stds[year].append(0)
+                        continue
                     returns = get_returns(data_year_filtered["close"].values)
                     mean_returns[year].append(np.mean(returns) * DAYS)
                     stds[year].append(np.std(returns) * np.sqrt(DAYS))
@@ -56,6 +62,6 @@ if __name__ == "__main__":
         **{f"return_{col}": mean_returns[col] for col in mean_returns},
         **{f"vol_{col}": stds[col] for col in stds},
     }
-    aggregated = pd.DataFrame(obj)
+    aggregated = pd.DataFrame(obj).dropna()
     aggregated.to_csv("./aggregated.csv")
     json.dump(obj, open("../web/src/data/list_aggregated.json", "w+"))

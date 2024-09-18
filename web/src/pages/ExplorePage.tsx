@@ -8,10 +8,14 @@ import SelectInput from '../components/SelectInput';
 
 const ExplorePage: FC = (): ReactElement => {
 
-    const [years] = React.useState(AggregatedData.GetYears());
+    const defaultYears: string[] = []
+    const [years, setYears] = React.useState(defaultYears);
+    React.useEffect(() => {
+        setYears(AggregatedData.GetYears());
+        console.log(AggregatedData.GetYears())
+    }, []);
 
     return (<div>
-
         <ImageSection children={(<>
             <div className='space'></div>
             <h1>Exploration des titres</h1>
