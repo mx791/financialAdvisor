@@ -10,18 +10,16 @@ import Constants from '../Constants';
 
 const ExplorePage: FC = (): ReactElement => {
 
-    const defaultYears: string[] = []
-    const [years, setYears] = React.useState(defaultYears);
-    React.useEffect(() => {
-        setYears(AggregatedData.GetYears());
-    }, []);
+    const [years] = React.useState(AggregatedData.GetYears());
 
     const defaultData : Instrument[] = [];
     const [data, setData] = React.useState(defaultData);
 
     const filterData = () => {
         setData(AggregatedData.GetData("2018"));
-    }
+    };
+
+    const [year, setYear] = React.useState(years[0]);
 
     return (<div>
         <ImageSection children={(<>
@@ -36,9 +34,17 @@ const ExplorePage: FC = (): ReactElement => {
 
             <div className='space'></div>
             <h2>Historique</h2>
-            <SelectInput name='Année minimale' options={years} />
+            <SelectInput
+                name='Année minimale'
+                options={years}
+                value={year}
+                setValue={setYear}
+            />
             <div className='sub-space'></div>
 
+            <h2>Volumme</h2>
+            <TextBox name="Volumme minimal" type="number" />
+            <div className='sub-space'></div>
 
             <h2>Rendement</h2>
             <SplitContainer
@@ -46,7 +52,6 @@ const ExplorePage: FC = (): ReactElement => {
                 secondChild={(<TextBox name="Rendement maximal (%)" type="number" />)}
             />
             <div className='sub-space'></div>
-
 
             <h2>Volatilité</h2>
             <SplitContainer
@@ -60,6 +65,8 @@ const ExplorePage: FC = (): ReactElement => {
             </center>
             <div className='space'></div>
 
+            { data.length !== 0 ? (<p>{data.length} items</p>) : "" }
+
             { data.length !== 0 ? (
             <Plot
                 data={[{
@@ -69,7 +76,7 @@ const ExplorePage: FC = (): ReactElement => {
                     mode: 'markers',
                     marker: {
                         color: Constants.themeColor,
-                        size: data.map(itm => 1 + Math.log(1+itm.volumme))
+                        size: data.map(itm => 5 + 2*Math.log(1+itm.volumme))
                     },
                     text: data.map(itm => itm.name),
                     hoverinfo: "text"
