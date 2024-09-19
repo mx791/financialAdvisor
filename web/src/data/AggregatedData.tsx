@@ -26,6 +26,7 @@ const fcs = {
         minReturn: number, maxReturn: number,
         minVolatility: number, maxVolatility: number,
     ) : Instrument[] => {
+        console.log(maxYear);
         const out: Instrument[] = [];
         for (let i=0; i<Data["name"].length; i++) {
             if (Data["first_year"][i] > parseInt(maxYear)) {
