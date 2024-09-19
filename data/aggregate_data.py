@@ -14,6 +14,7 @@ if __name__ == "__main__":
         pd.read_csv("./etf_list.csv"),
         pd.read_csv("./funds.csv")
     ])
+    print(len(df), " lines before processing")
 
     names, symbols, number_of_values, first_years, mean_volumme = [], [], [], [], []
     mean_returns, stds = {i: [] for i in range(2014, 2025)}, {i: [] for i in range(2014, 2025)}
@@ -30,6 +31,9 @@ if __name__ == "__main__":
 
             first_year = data["date"].dt.year.min()
             last_year = data["date"].dt.year.max()
+            if last_year < 2024:
+                continue
+
             mean_volumme.append(data["volumme"].mean())
 
             names.append(name)
@@ -67,5 +71,6 @@ if __name__ == "__main__":
         **{f"vol_{col}": stds[col] for col in stds},
     }
     aggregated = pd.DataFrame(obj).dropna()
+    print(len(aggregated), " lines after processing")
     aggregated.to_csv("./aggregated.csv")
     json.dump(obj, open("../web/src/data/list_aggregated.json", "w+"))

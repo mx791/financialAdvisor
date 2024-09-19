@@ -99,3 +99,9 @@ h2 {
 option {
     padding: 0.5em;
 }
+
+.box {
+    background-color: var(--theme-color);
+    color: #fff;
+    padding: 1em;
+}

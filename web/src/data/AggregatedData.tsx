@@ -6,7 +6,8 @@ export type Instrument = {
     mean_return: number,
     volatility: number,
     volumme: number,
-    first_year: number
+    first_year: number,
+    aggregated_from: number
 }
 
 interface IData {
@@ -53,7 +54,8 @@ const fcs = {
                 mean_return: Data["return_" + maxYear as keyof IData][i]*100,
                 volatility: Data["vol_" + maxYear as keyof IData][i]*100,
                 volumme: Data["volumme"][i],
-                first_year: Data["first_year"][i]
+                first_year: Data["first_year"][i],
+                aggregated_from: parseInt(maxYear)
             });
         }
         return out;

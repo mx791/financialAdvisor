@@ -9,6 +9,7 @@ interface TextBoxProps {
 
 const TextBox: FC<TextBoxProps> = (props: TextBoxProps): ReactElement => {
     return (<div className=''>
+        <p>{ props.name }</p>
         <input
             className='textbox'
             type={props.type}

@@ -49,7 +49,7 @@ const ExplorePage: FC = (): ReactElement => {
             />
             <div className='sub-space'></div>
 
-            <h2>Volumme</h2>
+            <h2>Volume</h2>
             <TextBox
                 name="Volumme minimal"
                 type="number"
@@ -121,16 +121,16 @@ const ExplorePage: FC = (): ReactElement => {
             />) : "" }
 
             <div className='sub-space'></div>
-            { typeof selectedInstrument === "undefined" ? "" : (<div>
+            { typeof selectedInstrument === "undefined" ? "" : (<div className='box'>
                 <b>{ selectedInstrument?.name }</b><br/>
-                <p>Identifiant de la valeur: { selectedInstrument?.identifier }</p>
                 <p>Début def l'historique: { selectedInstrument?.first_year }</p>
-                <p>Rendement moyen: { selectedInstrument?.mean_return }</p>
-                <p>Volatilité: { selectedInstrument?.volatility }</p>
-                <p>Moyenne des volummes: { selectedInstrument?.volumme }</p>
+                <p>Rendement moyen depuis { selectedInstrument.aggregated_from }: { Math.floor(selectedInstrument?.mean_return*100.0)/100.0 } % / ans</p>
+                <p>Volatilité depuis { selectedInstrument.aggregated_from }: { Math.floor(selectedInstrument?.volatility*100.0)/100.0 } %</p>
+                <p>Ratio de Sharp: { Math.floor(selectedInstrument.mean_return / selectedInstrument.volatility * 100.0) / 100.0 }</p>
+                <p>Moyenne des volumes quotidiens: { Math.floor(selectedInstrument?.volumme) } €</p>
             </div>) }
 
-            <div className='space'></div>
+            <div className='space'></div> 
         </div>
     </div>)
 };
