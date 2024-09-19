@@ -8,13 +8,10 @@ interface SelectProps {
 }
 
 const SelectInput: FC<SelectProps> = (props: SelectProps): ReactElement => {
-    return (<select className='textbox'>
+    return (<select className='textbox' value={props.value} onChange={(e) => props.setValue(e.target.value)}>
         { props.options.map((itm) => (
-            <option
-                selected={itm === props.value}
-                onClick={() => props.setValue(itm)}
-            >{itm}</option>
-        ))}
+            <option>{itm}</option>
+        )) }
     </select>)
 };
 
