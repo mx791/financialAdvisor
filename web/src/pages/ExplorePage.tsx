@@ -18,15 +18,16 @@ interface InstrumentDetailModalProps {
 const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: InstrumentDetailModalProps): ReactElement => {
     
     const [values, setValues] = React.useState(undefined as number[] | undefined);
-    // const [dates, setDates] = React.useState(undefined as string[] | undefined);
+    const [dates, setDates] = React.useState(undefined as string[] | undefined);
     
     React.useEffect(() => {
         const fc = async () => {
             const rawData = await fetch("https://raw.githubusercontent.com/mx791/financialAdvisor/refs/heads/main/data/out/" + props.instrument.identifier + ".csv");
             const content = await rawData.text();
-            //const newDates = content.split("\n").slice(1,-1).map(itm => itm.split(",")[1]);
+            const newDates = content.split("\n").slice(1,-1).map(itm => itm.split(",")[1]);
             const newValues = content.split("\n").slice(1,-1).map(itm => parseFloat(itm.split(",")[2]));
             setValues(newValues);
+            setDates(newDates);
         }
         fc();
     }, [props.instrument.identifier]);
@@ -37,10 +38,9 @@ const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: Instrument
     
     return (<Modal close={props.closeModal} children={(<>
         <h2>{ props.instrument.name }</h2>
-        
         <Plot
             data={[{
-                x: values.map((v, i) => i),
+                x: dates,
                 y: values,
                 type: 'scatter',
                 mode: 'lines+markers',
@@ -50,7 +50,7 @@ const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: Instrument
                 }
             }]}
             layout={{
-                width: Math.floor(window.innerWidth*0.7), height: 500, title: 'Cours'
+                width: Math.floor(window.innerWidth*0.7), height: 500, title: "Evolution du prix de l'actif"
             }}
         />
     </>)}/>)
