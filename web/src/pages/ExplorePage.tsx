@@ -7,7 +7,54 @@ import AggregatedData, { Instrument } from '../data/AggregatedData';
 import SelectInput from '../components/SelectInput';
 import Plot from 'react-plotly.js';
 import Constants from '../Constants';
+import Modal from '../components/Modal';
 
+
+interface InstrumentDetailModalProps {
+    instrument: Instrument,
+    closeModal: () => void 
+}
+
+const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: InstrumentDetailModalProps): ReactElement => {
+    
+    const [values, setValues] = React.useState(undefined as number[] | undefined);
+    // const [dates, setDates] = React.useState(undefined as string[] | undefined);
+    
+    React.useEffect(() => {
+        const fc = async () => {
+            const rawData = await fetch("https://raw.githubusercontent.com/mx791/financialAdvisor/refs/heads/main/data/out/" + props.instrument.identifier + ".csv");
+            const content = await rawData.text();
+            //const newDates = content.split("\n").slice(1,-1).map(itm => itm.split(",")[1]);
+            const newValues = content.split("\n").slice(1,-1).map(itm => parseFloat(itm.split(",")[2]));
+            setValues(newValues);
+        }
+        fc();
+    }, [props.instrument.identifier]);
+
+    if (typeof values === "undefined") {
+        return (<>Waiting...</>)
+    }
+    
+    return (<Modal close={props.closeModal} children={(<>
+        <h2>{ props.instrument.name }</h2>
+        
+        <Plot
+            data={[{
+                x: values.map((v, i) => i),
+                y: values,
+                type: 'scatter',
+                mode: 'lines+markers',
+                marker: {
+                    color: Constants.themeColor,
+                    size: 3
+                }
+            }]}
+            layout={{
+                width: Math.floor(window.innerWidth*0.7), height: 500, title: 'Cours'
+            }}
+        />
+    </>)}/>)
+};
 
 const ExplorePage: FC = (): ReactElement => {
 
@@ -21,6 +68,7 @@ const ExplorePage: FC = (): ReactElement => {
     const [minVolatility, setMinVolatility] = React.useState(0);
     const [maxVolatility, setMaxVolatility] = React.useState(100);
     const [selectedInstrument, setSelectedInstruement] = React.useState(undefined as Instrument | undefined);
+    const [modalOpen, setModalOpen] = React.useState(false);
 
     const filterData = () => {
         setData(AggregatedData.GetData(
@@ -121,7 +169,7 @@ const ExplorePage: FC = (): ReactElement => {
             />) : "" }
 
             <div className='sub-space'></div>
-            { typeof selectedInstrument === "undefined" ? "" : (<div className='box'>
+            { typeof selectedInstrument === "undefined" ? "" : (<div className='box' onClick={() => setModalOpen(true)}>
                 <b>{ selectedInstrument?.name }</b><br/>
                 <p>Début def l'historique: { selectedInstrument?.first_year }</p>
                 <p>Rendement moyen depuis { selectedInstrument.aggregated_from }: { Math.floor(selectedInstrument?.mean_return*100.0)/100.0 } % / ans</p>
@@ -130,7 +178,12 @@ const ExplorePage: FC = (): ReactElement => {
                 <p>Moyenne des volumes quotidiens: { Math.floor(selectedInstrument?.volumme) } €</p>
             </div>) }
 
-            <div className='space'></div> 
+            <div className='space'></div>
+
+            { modalOpen && typeof selectedInstrument !== "undefined" ? (<InstrumentDetailModal
+                instrument={selectedInstrument}
+                closeModal={() => setModalOpen(false)}
+            />) : "" }
         </div>
     </div>)
 };

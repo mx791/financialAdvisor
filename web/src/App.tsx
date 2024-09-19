@@ -1,22 +1,25 @@
 import React from 'react';
+import ExplorePage from './pages/ExplorePage';
+/** 
 import Menu from './components/Menu';
 import LandingPage from './pages/LandingPage';
 import NonePage from './pages/NonePage';
-import ExplorePage from './pages/ExplorePage';
 import Footer from './pages/Footer';
+*/
+
 
 
 function App() {
 
-  const [page, setPage] = React.useState("MAIN");
+  /**const [page, setPage] = React.useState("MAIN");
   const changePage = (i: String) => setPage(i + "");
-  const implemented = ["MAIN", "EXPLORE"];
+  const implemented = ["MAIN", "EXPLORE"];*/
 
   React.useEffect(() => {
     document.title = "Financial Advisor"
   }, []);
 
-  return (
+  /**return (
     <div className="App">
       <Menu setActivePage={changePage}/>
       <div style={{minHeight: "80vh"}}>
@@ -26,7 +29,8 @@ function App() {
       </div>
       <Footer />
     </div>
-  );
+  );*/
+  return (<ExplorePage />)
 }
 
 export default App;
