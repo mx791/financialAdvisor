@@ -20,7 +20,7 @@ const ExplorePage: FC = (): ReactElement => {
     const [maxReturn, setMaxReturn] = React.useState(100);
     const [minVolatility, setMinVolatility] = React.useState(0);
     const [maxVolatility, setMaxVolatility] = React.useState(100);
-    
+    const [selectedInstrument, setSelectedInstruement] = React.useState(undefined as Instrument | undefined);
 
     const filterData = () => {
         setData(AggregatedData.GetData(
@@ -117,8 +117,18 @@ const ExplorePage: FC = (): ReactElement => {
                     xaxis: {title: "Volatilité %"},
                     yaxis: {title: "Rendement moyen annualisé %"},
                 }}
-                onClick={(event) => console.debug(event)}
+                onClick={(event) => setSelectedInstruement(data[event.points[0].pointIndex])}
             />) : "" }
+
+            <div className='sub-space'></div>
+            { typeof selectedInstrument === undefined ? "" : (<div>
+                <b>{ selectedInstrument?.name }</b><br/>
+                <p>Identifiant de la valeur: { selectedInstrument?.identifier }</p>
+                <p>Début def l'historique: { selectedInstrument?.first_year }</p>
+                <p>Rendement moyen: { selectedInstrument?.mean_return }</p>
+                <p>Volatilité: { selectedInstrument?.volatility }</p>
+                <p>Moyenne des volummes: { selectedInstrument?.volumme }</p>
+            </div>) }
 
             <div className='space'></div>
         </div>
