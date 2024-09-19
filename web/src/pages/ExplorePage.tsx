@@ -113,7 +113,7 @@ const ExplorePage: FC = (): ReactElement => {
                     hoverinfo: "text"
                 }]}
                 layout={{
-                    width: Math.floor(window.innerWidth*0.8), height: 500, title: 'Diagramme risk/return',
+                    width: Math.min(1000, Math.floor(window.innerWidth*0.9)), height: 500, title: 'Diagramme risk/return',
                     xaxis: {title: "Volatilité %"},
                     yaxis: {title: "Rendement moyen annualisé %"},
                 }}
