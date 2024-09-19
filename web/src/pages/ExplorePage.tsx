@@ -117,6 +117,7 @@ const ExplorePage: FC = (): ReactElement => {
                     xaxis: {title: "Volatilité %"},
                     yaxis: {title: "Rendement moyen annualisé %"},
                 }}
+                onClick={(event) => console.debug(event)}
             />) : "" }
 
             <div className='space'></div>

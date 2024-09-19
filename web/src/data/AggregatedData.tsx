@@ -39,7 +39,7 @@ const fcs = {
 
             const vol = Data["vol_" + maxYear as keyof IData][i] * 100;
             const ret = Data["return_" + maxYear as keyof IData][i] * 100;
-            if (vol < minVolatility || vol > maxVolatility) {
+            if (vol < minVolatility || vol > maxVolatility || vol === 0.0) {
                 continue;
             }
             if (ret < minReturn || ret > maxReturn) {
