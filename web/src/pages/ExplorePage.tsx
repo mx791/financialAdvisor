@@ -121,7 +121,7 @@ const ExplorePage: FC = (): ReactElement => {
             />) : "" }
 
             <div className='sub-space'></div>
-            { typeof selectedInstrument === undefined ? "" : (<div>
+            { typeof selectedInstrument === "undefined" ? "" : (<div>
                 <b>{ selectedInstrument?.name }</b><br/>
                 <p>Identifiant de la valeur: { selectedInstrument?.identifier }</p>
                 <p>Début def l'historique: { selectedInstrument?.first_year }</p>
