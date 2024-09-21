@@ -50,7 +50,7 @@ const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: Instrument
                 }
             }]}
             layout={{
-                width: Math.floor(window.innerWidth*0.7), height: 500, title: "Evolution du prix de l'actif"
+                width: Math.floor(window.innerWidth*0.8), height: 500, title: "Evolution du prix de l'actif"
             }}
         />
     </>)}/>)

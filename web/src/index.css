@@ -104,6 +104,7 @@ option {
     background-color: var(--theme-color);
     color: #fff;
     padding: 1em;
+    cursor: pointer;
 }
 
 .modal-dark {

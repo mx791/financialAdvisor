@@ -24,8 +24,9 @@ def fetch(symbol: str) -> pd.DataFrame:
 if __name__ == "__main__":
 
     df = [
-        *pd.read_csv("./etf_list.csv")["link"].values,
-        *pd.read_csv("./funds.csv")["link"].values,
+        #*pd.read_csv("./etf_list.csv")["link"].values,
+        #*pd.read_csv("./funds.csv")["link"].values,
+        *pd.read_csv("./symbols.csv")["id"].values,
     ]
 
     print(f"{len(df)} lines to fetch")
