@@ -10,6 +10,9 @@ def get_returns(data: np.array) -> np.array:
     returns = data[1:] / data[:-1] - 1.0
     return returns[~np.isnan(returns)]
 
+def compute_mm(data,  windows = 100):
+    out = np.array([data[i] / data[i-windows] for i in range(windows, len(data))])
+    return out
 
 def correlation(data: pd.DataFrame, target: pd.DataFrame):
     target["date"] = pd.to_datetime(target.index, utc=True)
@@ -23,7 +26,7 @@ def correlation(data: pd.DataFrame, target: pd.DataFrame):
     prices = data["close"].values
     index = data["Close"].values
 
-    return pearsonr(prices, index)[0]
+    return pearsonr(compute_mm(prices), compute_mm(index))[0]
 
 
 
