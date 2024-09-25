@@ -62,12 +62,12 @@ if __name__ == "__main__":
     }
 
     df = pd.concat([
-        pd.read_csv("./etf_list.csv"),
-        pd.read_csv("./funds.csv"),
-        #pd.read_csv("./symbols.csv"),
+        #pd.read_csv("./etf_list.csv"),
+        #pd.read_csv("./funds.csv"),
+        pd.read_csv("./symbols.csv"),
     ])
     print(len(df), " lines before processing")
-    #df["link"] = df["id"]
+    df["link"] = df["id"]
 
     names, symbols, number_of_values, first_years, mean_volumme = [], [], [], [], []
     MIN_YEAR = 2022

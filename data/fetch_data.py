@@ -31,9 +31,22 @@ if __name__ == "__main__":
 
     print(f"{len(df)} lines to fetch")
 
+    counter = 0
     for s in tqdm.tqdm(df):
         try:
             data = fetch(s)
-            data.to_csv(f"./out/{s}.csv")
         except Exception:
             print("error with : " + s)
+            continue
+        
+        try:
+            old_data = pd.read_csv(f"./out/{s}.csv")
+            data = pd.concat([old_data, data]).drop_duplicates()
+            data = data.sort_values("date").reset_index()
+        except:
+            pass
+
+        counter += 1
+        data.to_csv(f"./out/{s}.csv")
+    
+    print(counter)
