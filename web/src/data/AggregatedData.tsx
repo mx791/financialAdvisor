@@ -12,7 +12,9 @@ export type Instrument = {
     correlation_sp: number,
     correlation_nasdaq: number,
     correlation_nikkei: number,
-    correlation_dax: number
+    correlation_dax: number,
+    correlation_world: number,
+    correlation_eurostoxx: number,
 }
 
 interface IData {
@@ -66,6 +68,8 @@ const fcs = {
                 correlation_dax: Data["correlation_DAX"][i],
                 correlation_nikkei: Data["correlation_NIKKEI"][i],
                 correlation_nasdaq: Data["correlation_NASDAQ"][i],
+                correlation_world: Data["correlation_MSCI World"][i],
+                correlation_eurostoxx: Data["correlation_EURO STOX 600"][i],
             });
         }
         return out;

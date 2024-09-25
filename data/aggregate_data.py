@@ -50,6 +50,8 @@ INDEXS = {
     "SP500": "^GSPC",
     "DAX": "^GDAXI",
     "NIKKEI": "^N225",
+    "MSCI World": "^990100-USD-STRD",
+    "EURO STOX 600": "^STOXX",
 }
 
 
