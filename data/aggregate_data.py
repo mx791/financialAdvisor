@@ -6,8 +6,17 @@ import yfinance as yf
 from tqdm import tqdm
 
 
-def get_returns(data: np.array) -> np.array:
-    returns = data[1:] / data[:-1] - 1.0
+def get_avg_count_per_years(data: pd.DataFrame) -> int:
+    data["y"] = data["date"].dt.year
+    points_per_year = data.groupby("y").count()
+    if len(points_per_year) < 3:
+        return 252
+    return int(points_per_year.values[1:-1].mean())
+
+
+def get_returns(data: np.array, delta: int = 1) -> np.array:
+    #returns = data[1:] / data[:-1] - 1.0
+    returns = data[delta:] / data[:-delta] - 1.0
     return returns[~np.isnan(returns)]
 
 def compute_mm(data,  windows = 100):
@@ -26,6 +35,9 @@ def correlation(data: pd.DataFrame, target: pd.DataFrame):
     prices = data["close"].values
     index = data["Close"].values
 
+    if len(compute_mm(prices)) < 15:
+        return 0.0
+        
     return pearsonr(compute_mm(prices), compute_mm(index))[0]
 
 
@@ -54,52 +66,62 @@ if __name__ == "__main__":
     #df["link"] = df["id"]
 
     names, symbols, number_of_values, first_years, mean_volumme = [], [], [], [], []
-    mean_returns, stds = {i: [] for i in range(2014, 2025)}, {i: [] for i in range(2014, 2025)}
+    MIN_YEAR = 2022
+    START_YEAR = 2014
+    CURRENT_YEAR = 2024
+    mean_returns, stds = {i: [] for i in range(2014, MIN_YEAR)}, {i: [] for i in range(2014, MIN_YEAR)}
     correlations = {index: [] for index in indexes_data}
 
     for i in tqdm(range(len(df))):
+    #for i in tqdm(range(10)):
+        name = df["name"].values[i]
+        ids = df["link"].values[i]
+
         try:
-            name = df["name"].values[i]
-            ids = df["link"].values[i]
             data = pd.read_csv(f"./out/{ids}.csv", index_col=0)
             data = data.dropna()
+            data = data[data["close"] > 0.0]
             data["date"] = pd.to_datetime(data["date"])
-            if len(data) < 100:
-                continue
+        except:
+            continue
 
-            first_year = data["date"].dt.year.min()
-            last_year = data["date"].dt.year.max()
-            if last_year < 2024:
-                continue
+        first_year = data["date"].dt.year.min()
+        last_year = data["date"].dt.year.max()
+        if last_year < CURRENT_YEAR or first_year > MIN_YEAR:
+            continue
 
-            mean_volumme.append(data["volumme"].mean())
+        records_per_years = get_avg_count_per_years(data)
 
-            names.append(name)
-            symbols.append(ids)
-            number_of_values.append(len(data))
-            first_years.append(int(first_year))
+        if len(data) < 200:
+            print(f"Not enought data for {ids} ({len(data)})")
+            continue        
 
-            for index in indexes_data:
-                correlations[index].append(correlation(data, indexes_data[index]))
+        mean_volumme.append(data["volumme"].mean())
 
-            DAYS = 252
+        names.append(name)
+        symbols.append(ids)
+        number_of_values.append(len(data))
+        first_years.append(int(first_year))
 
-            for year in range(2014, 2025):
-                if year < first_year:
+        for index in indexes_data:
+            correlations[index].append(correlation(data, indexes_data[index]))
+
+        DAYS = 252
+
+        for year in range(2014, MIN_YEAR):
+            if year < first_year:
+                mean_returns[year].append(0)
+                stds[year].append(0)
+
+            else:
+                data_year_filtered = data[data["date"].dt.year >= year]
+                if len(data_year_filtered) == 0:
                     mean_returns[year].append(0)
                     stds[year].append(0)
-
-                else:
-                    data_year_filtered = data[data["date"].dt.year >= year]
-                    if len(data_year_filtered) == 0:
-                        mean_returns[year].append(0)
-                        stds[year].append(0)
-                        continue
-                    returns = get_returns(data_year_filtered["close"].values)
-                    mean_returns[year].append(np.mean(returns) * DAYS)
-                    stds[year].append(np.std(returns) * np.sqrt(DAYS))
-        except Exception as e:
-            print(e)
+                    continue
+                returns = get_returns(data_year_filtered["close"].values, records_per_years)
+                mean_returns[year].append(np.mean(returns))
+                stds[year].append(np.std(returns))
     
     obj = {
         "name": names,
