@@ -34,7 +34,7 @@ const fcs = {
         maxYear: string, minVolumme: number,
         minReturn: number, maxReturn: number,
         minVolatility: number, maxVolatility: number,
-        textSearch: string
+        textSearch: string, minSharp: number
     ) : Instrument[] => {
         console.log(maxYear);
         const out: Instrument[] = [];
@@ -57,6 +57,10 @@ const fcs = {
             }
 
             if (textSearch !== "" && !Data["name"][i].includes(textSearch)) {
+                continue;
+            }
+
+            if (minSharp >= ret / vol) {
                 continue;
             }
 

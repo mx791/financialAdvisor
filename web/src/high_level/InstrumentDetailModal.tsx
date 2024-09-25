@@ -51,7 +51,7 @@ const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: Instrument
                 }
             }]}
             layout={{
-                width: Math.floor(window.innerWidth*0.8),
+                width: Math.floor(window.innerWidth*0.8) - 20,
                 height: Math.min(Math.floor(window.innerWidth*0.8), 500),
                 title: "Evolution du prix de l'actif"
             }}
@@ -67,7 +67,7 @@ const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: Instrument
                 }
             }]}
             layout={{
-                width: Math.floor(window.innerWidth*0.8),
+                width: Math.floor(window.innerWidth*0.8) - 20,
                 height: Math.min(Math.floor(window.innerWidth*0.8), 500),
                 title: "Corrélation avec les indices"
             }}

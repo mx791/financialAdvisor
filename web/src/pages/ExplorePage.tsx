@@ -17,6 +17,7 @@ const ExplorePage: FC = (): ReactElement => {
     const [data, setData] = React.useState(defaultData);
     const [year, setYear] = React.useState(years[0]);
     const [minVolumme, setMinVolumme] = React.useState(0);
+    const [minSharp, setMinSharp] = React.useState(0);
     const [minReturn, setMinReturn] = React.useState(-100);
     const [maxReturn, setMaxReturn] = React.useState(100);
     const [minVolatility, setMinVolatility] = React.useState(0);
@@ -27,7 +28,7 @@ const ExplorePage: FC = (): ReactElement => {
 
     const filterData = () => {
         setData(AggregatedData.GetData(
-            year, minVolumme, minReturn, maxReturn, minVolatility, maxVolatility, textSearch
+            year, minVolumme, minReturn, maxReturn, minVolatility, maxVolatility, textSearch, minSharp
         ));
     };
 
@@ -65,6 +66,14 @@ const ExplorePage: FC = (): ReactElement => {
                 type="number"
                 value={String(minVolumme)}
                 setValue={(v) => setMinVolumme(parseFloat(v))}
+            />
+            <div className='sub-space'></div>
+
+            <TextBox
+                name="Sharp minimal"
+                type="number"
+                value={String(minSharp)}
+                setValue={(v) => setMinSharp(parseFloat(v))}
             />
             <div className='sub-space'></div>
 
