@@ -56,7 +56,7 @@ const fcs = {
                 continue;
             }
 
-            if (textSearch != "" && !Data["name"][i].includes(textSearch)) {
+            if (textSearch !== "" && !Data["name"][i].includes(textSearch)) {
                 continue;
             }
 
