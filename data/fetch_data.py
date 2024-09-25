@@ -40,7 +40,7 @@ if __name__ == "__main__":
             continue
         
         try:
-            old_data = pd.read_csv(f"./out/{s}.csv")
+            old_data = pd.read_csv(f"./out/{s}.csv", index_col=0)
             data = pd.concat([old_data, data]).drop_duplicates()
             data = data.sort_values("date").reset_index()
         except:
