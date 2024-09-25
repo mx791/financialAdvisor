@@ -7,7 +7,12 @@ export type Instrument = {
     volatility: number,
     volumme: number,
     first_year: number,
-    aggregated_from: number
+    aggregated_from: number,
+    correlation_cac: number,
+    correlation_sp: number,
+    correlation_nasdaq: number,
+    correlation_nikkei: number,
+    correlation_dax: number
 }
 
 interface IData {
@@ -55,7 +60,12 @@ const fcs = {
                 volatility: Data["vol_" + maxYear as keyof IData][i]*100,
                 volumme: Data["volumme"][i],
                 first_year: Data["first_year"][i],
-                aggregated_from: parseInt(maxYear)
+                aggregated_from: parseInt(maxYear),
+                correlation_cac: Data["correlation_CAC40"][i],
+                correlation_sp: Data["correlation_SP500"][i],
+                correlation_dax: Data["correlation_DAX"][i],
+                correlation_nikkei: Data["correlation_NIKKEI"][i],
+                correlation_nasdaq: Data["correlation_NASDAQ"][i],
             });
         }
         return out;

@@ -19,6 +19,8 @@ const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: Instrument
     
     const [values, setValues] = React.useState(undefined as number[] | undefined);
     const [dates, setDates] = React.useState(undefined as string[] | undefined);
+    const indexes = ["S&P 500", "NASDAQ 100", "CAC 40", "DAX", "NIKKEI"];
+    const correlationsScores = [props.instrument.correlation_sp, props.instrument.correlation_nasdaq, props.instrument.correlation_cac, props.instrument.correlation_dax, props.instrument.correlation_nikkei];
     
     React.useEffect(() => {
         const fc = async () => {
@@ -50,7 +52,22 @@ const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: Instrument
                 }
             }]}
             layout={{
-                width: Math.floor(window.innerWidth*0.8), height: 500, title: "Evolution du prix de l'actif"
+                width: Math.floor(window.innerWidth*0.8),
+                height: Math.min(Math.floor(window.innerWidth*0.8), 500),
+                title: "Evolution du prix de l'actif"
+            }}
+        />
+
+        <Plot
+            data={[{
+                x: indexes,
+                y: correlationsScores,
+                type: 'bar',
+            }]}
+            layout={{
+                width: Math.floor(window.innerWidth*0.8),
+                height: Math.min(Math.floor(window.innerWidth*0.8), 500),
+                title: "Corrélation avec les indices"
             }}
         />
     </>)}/>)

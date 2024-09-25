@@ -19,9 +19,11 @@ def get_returns(data: np.array, delta: int = 1) -> np.array:
     returns = data[delta:] / data[:-delta] - 1.0
     return returns[~np.isnan(returns)]
 
+
 def compute_mm(data,  windows = 100):
     out = np.array([data[i] / data[i-windows] for i in range(windows, len(data))])
     return out
+
 
 def correlation(data: pd.DataFrame, target: pd.DataFrame):
     target["date"] = pd.to_datetime(target.index, utc=True)
