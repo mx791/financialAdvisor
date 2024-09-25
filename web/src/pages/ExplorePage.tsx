@@ -23,10 +23,11 @@ const ExplorePage: FC = (): ReactElement => {
     const [maxVolatility, setMaxVolatility] = React.useState(100);
     const [selectedInstrument, setSelectedInstruement] = React.useState(undefined as Instrument | undefined);
     const [modalOpen, setModalOpen] = React.useState(false);
+    const [textSearch, setTextSearch] = React.useState("");
 
     const filterData = () => {
         setData(AggregatedData.GetData(
-            year, minVolumme, minReturn, maxReturn, minVolatility, maxVolatility
+            year, minVolumme, minReturn, maxReturn, minVolatility, maxVolatility, textSearch
         ));
     };
 
@@ -51,7 +52,14 @@ const ExplorePage: FC = (): ReactElement => {
             />
             <div className='sub-space'></div>
 
-            <h2>Volume</h2>
+            <TextBox
+                name="Nom du fond"
+                type="text"
+                value={textSearch}
+                setValue={(v) => setTextSearch(v)}
+            />
+            <div className='sub-space'></div>
+
             <TextBox
                 name="Volumme minimal"
                 type="number"
@@ -60,7 +68,6 @@ const ExplorePage: FC = (): ReactElement => {
             />
             <div className='sub-space'></div>
 
-            <h2>Rendement</h2>
             <SplitContainer
                 firstChild={(<TextBox
                     name="Rendement minimal (%)"
@@ -77,7 +84,6 @@ const ExplorePage: FC = (): ReactElement => {
             />
             <div className='sub-space'></div>
 
-            <h2>Volatilité</h2>
             <SplitContainer
                 firstChild={(<TextBox
                     name="Volatilité minimal (%)"

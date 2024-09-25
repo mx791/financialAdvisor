@@ -62,6 +62,9 @@ const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: Instrument
                 x: indexes,
                 y: correlationsScores,
                 type: 'bar',
+                marker: {
+                    color: Constants.themeColor
+                }
             }]}
             layout={{
                 width: Math.floor(window.innerWidth*0.8),
@@ -69,6 +72,7 @@ const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: Instrument
                 title: "Corrélation avec les indices"
             }}
         />
+
     </>)}/>)
 };
 

@@ -34,6 +34,7 @@ const fcs = {
         maxYear: string, minVolumme: number,
         minReturn: number, maxReturn: number,
         minVolatility: number, maxVolatility: number,
+        textSearch: string
     ) : Instrument[] => {
         console.log(maxYear);
         const out: Instrument[] = [];
@@ -52,6 +53,10 @@ const fcs = {
                 continue;
             }
             if (ret < minReturn || ret > maxReturn) {
+                continue;
+            }
+
+            if (textSearch != "" && !Data["name"][i].includes(textSearch)) {
                 continue;
             }
 
@@ -74,7 +79,6 @@ const fcs = {
         }
         return out;
     }
-    
 }
 
 export default fcs;
