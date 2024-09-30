@@ -8,15 +8,20 @@ class Portefeuille {
 
     public lines: Line[] = [];
 
+    public constructor(lines: Line[]) {
+        this.lines = lines;
+    }
+
     public static getInstance() : Portefeuille {
         try {
             let pf = localStorage.getItem("portefeuille")
             if (typeof pf != "undefined" && pf != null) {
-                return JSON.parse(pf) as Portefeuille;
+                const lines = JSON.parse(pf) as Line[];
+                return new Portefeuille(lines);
             }
         } catch {}
         
-        const newPf = new Portefeuille();
+        const newPf = new Portefeuille([]);
         localStorage.setItem("portefeuille", JSON.stringify(newPf));
         return newPf;
     }
