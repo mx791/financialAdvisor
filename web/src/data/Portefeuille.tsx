@@ -9,10 +9,13 @@ class Portefeuille {
     public lines: Line[] = [];
 
     public static getInstance() : Portefeuille {
-        let pf = localStorage.getItem("portefeuille")
-        if (typeof pf != "undefined" && pf != null) {
-            return JSON.parse(pf) as Portefeuille;
-        }
+        try {
+            let pf = localStorage.getItem("portefeuille")
+            if (typeof pf != "undefined" && pf != null) {
+                return JSON.parse(pf) as Portefeuille;
+            }
+        } catch {}
+        
         const newPf = new Portefeuille();
         localStorage.setItem("portefeuille", JSON.stringify(newPf));
         return newPf;
