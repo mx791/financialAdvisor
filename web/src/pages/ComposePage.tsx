@@ -6,7 +6,7 @@ import TextBox from '../components/TextBox';
 
 const ComposePage: FC = (): ReactElement => {
 
-    const [portefeuille] = React.useState(() => Portefeuille.getInstance());
+    const [portefeuille] = React.useState(() => Portefeuille.instance);
 
     return (<div>
         <ImageSection children={(<>

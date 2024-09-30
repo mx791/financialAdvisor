@@ -7,6 +7,7 @@ interface Line {
 class Portefeuille {
 
     public lines: Line[] = [];
+    public static instance : Portefeuille = this.getInstance();
 
     public constructor(lines: Line[]) {
         this.lines = lines;
@@ -22,7 +23,7 @@ class Portefeuille {
         } catch {}
         
         const newPf = new Portefeuille([]);
-        localStorage.setItem("portefeuille", JSON.stringify(newPf));
+        localStorage.setItem("portefeuille", JSON.stringify(newPf.lines));
         return newPf;
     }
 

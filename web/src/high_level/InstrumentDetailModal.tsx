@@ -22,7 +22,7 @@ const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: Instrument
         props.instrument.correlation_dax, props.instrument.correlation_nikkei, props.instrument.correlation_world,
         props.instrument.correlation_eurostoxx
     ];
-    const [portefeuille] = React.useState(() => Portefeuille.getInstance());
+    const [portefeuille] = React.useState(Portefeuille.instance);
 
     
     React.useEffect(() => {
