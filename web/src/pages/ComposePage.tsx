@@ -24,7 +24,7 @@ const ComposePage: FC = (): ReactElement => {
         <table>
         { portefeuille.lines.map((itm) => <>
             <tr><td>{itm.name}</td><td>
-                <TextBox name={"Pondération de " + itm.name} value={String(itm.ponderation)} type="number" setValue={(v) => parseFloat(v)}/>
+                <TextBox name="Pondération %" value={String(itm.ponderation * 100)} type="number" setValue={(v) => parseFloat(v)}/>
             </td></tr>
         </>) }
         </table>

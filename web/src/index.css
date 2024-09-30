@@ -92,6 +92,11 @@ h2 {
     font-size: 1.5em;
 }
 
+.bt-small {
+    padding: 0.3em 1em 0.3em 1em;
+    font-size: 1em;
+}
+
 .button:hover {
     background-color: var(--light-theme-color);
 }

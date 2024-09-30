@@ -4,7 +4,7 @@ import Plot from 'react-plotly.js';
 import Constants from '../Constants';
 import Modal from '../components/Modal';
 import Portefeuille from '../data/Portefeuille';
-import Button from '../components/Button';
+import Button, { SmallButton } from '../components/Button';
 
 
 interface InstrumentDetailModalProps {
@@ -23,6 +23,7 @@ const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: Instrument
         props.instrument.correlation_eurostoxx
     ];
     const [portefeuille] = React.useState(Portefeuille.instance);
+    const [isInPf, setIsInPf] = React.useState(() => Portefeuille.instance.isInPortefeuille(props.instrument.identifier));
 
     
     React.useEffect(() => {
@@ -77,12 +78,15 @@ const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: Instrument
             }}
         />
         <br />
-        { portefeuille.isInPortefeuille(props.instrument.identifier)
+        { isInPf
             ? <p>Le titre est dans votre portefeuille</p>
-            : <Button
+            : <center><SmallButton
                 text='Ajouter au portefeuille'
-                onClick={() => portefeuille.addLine(props.instrument.identifier, props.instrument.name)}
-            />
+                onClick={() => {
+                    portefeuille.addLine(props.instrument.identifier, props.instrument.name);
+                    setIsInPf(true);
+                }}
+            /></center>
         }
 
     </>)}/>)

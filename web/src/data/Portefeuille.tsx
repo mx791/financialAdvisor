@@ -15,7 +15,7 @@ class Portefeuille {
 
     public static getInstance() : Portefeuille {
         try {
-            let pf = localStorage.getItem("portefeuille")
+            let pf = localStorage.getItem("portefeuille");
             if (typeof pf != "undefined" && pf != null) {
                 const lines = JSON.parse(pf) as Line[];
                 return new Portefeuille(lines);
@@ -36,6 +36,11 @@ class Portefeuille {
         this.lines.push({
             id: id, name: name, ponderation: 0.1
         });
+        this.save();
+    }
+
+    public save() {
+        localStorage.setItem("portefeuille", JSON.stringify(this.lines));
     }
 
     public isInPortefeuille(id: String) : Boolean {
@@ -45,6 +50,10 @@ class Portefeuille {
             }
         }
         return false;
+    }
+
+    public updatePonderation(id: String, newValue: number) {
+        this.save();
     }
 }
 
