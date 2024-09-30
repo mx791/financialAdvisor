@@ -3,6 +3,8 @@ import { Instrument } from '../data/AggregatedData';
 import Plot from 'react-plotly.js';
 import Constants from '../Constants';
 import Modal from '../components/Modal';
+import Portefeuille from '../data/Portefeuille';
+import Button from '../components/Button';
 
 
 interface InstrumentDetailModalProps {
@@ -20,6 +22,8 @@ const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: Instrument
         props.instrument.correlation_dax, props.instrument.correlation_nikkei, props.instrument.correlation_world,
         props.instrument.correlation_eurostoxx
     ];
+    const [portefeuille] = React.useState(Portefeuille.getInstance());
+
     
     React.useEffect(() => {
         const fc = async () => {
@@ -72,6 +76,14 @@ const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: Instrument
                 title: "Corrélation avec les indices"
             }}
         />
+        <br />
+        { portefeuille.isInPortefeuille(props.instrument.identifier)
+            ? <p>Le titre est dans votre portefeuille</p>
+            : <Button
+                text='Ajouter au portefeuille'
+                onClick={() => portefeuille.addLine(props.instrument.identifier, props.instrument.name)}
+            />
+        }
 
     </>)}/>)
 };

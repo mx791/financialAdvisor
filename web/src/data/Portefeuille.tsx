@@ -28,6 +28,15 @@ class Portefeuille {
             id: id, name: name, ponderation: 0.1
         });
     }
+
+    public isInPortefeuille(id: String) : Boolean {
+        for (let i=0; i<this.lines.length; i++) {
+            if (this.lines[i].id === id) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 export default Portefeuille;
