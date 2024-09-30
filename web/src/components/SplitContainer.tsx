@@ -14,10 +14,14 @@ const SplitContainer: FC<SplitContainerProps> = (props: SplitContainerProps): Re
     const divStyle = {
         flex: "1"
     }
+    const divStyle2 = {
+        flex: "1",
+        paddingLeft: "1em"
+    }
     
     return (<div style={containerStyle}>
         <div style={divStyle}>{ props.firstChild }</div>
-        <div style={divStyle}>{ props.secondChild }</div>
+        <div style={divStyle2}>{ props.secondChild }</div>
     </div>)
 };
 
