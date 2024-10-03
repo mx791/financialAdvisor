@@ -78,16 +78,16 @@ const InstrumentDetailModal: FC<InstrumentDetailModalProps> = (props: Instrument
             }}
         />
         <br />
-        { isInPf
+        <center>{ isInPf
             ? <p>Le titre est dans votre portefeuille</p>
-            : <center><SmallButton
+            : <SmallButton
                 text='Ajouter au portefeuille'
                 onClick={() => {
                     portefeuille.addLine(props.instrument.identifier, props.instrument.name);
                     setIsInPf(true);
                 }}
-            /></center>
-        }
+            />
+        }</center>
 
     </>)}/>)
 };

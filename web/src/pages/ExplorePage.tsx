@@ -144,6 +144,7 @@ const ExplorePage: FC = (): ReactElement => {
                 <p>Rendement moyen depuis { selectedInstrument.aggregated_from }: { Math.floor(selectedInstrument?.mean_return*100.0)/100.0 } % / ans</p>
                 <p>Volatilité depuis { selectedInstrument.aggregated_from }: { Math.floor(selectedInstrument?.volatility*100.0)/100.0 } %</p>
                 <p>Ratio de Sharp: { Math.floor(selectedInstrument.mean_return / selectedInstrument.volatility * 100.0) / 100.0 }</p>
+                <p>Probabilité de perte à un an: { Math.floor(selectedInstrument.lossRate * 100.0) / 100.0 } %</p>
                 <p>Moyenne des volumes quotidiens: { Math.floor(selectedInstrument?.volumme) } €</p>
             </div>) }
 
