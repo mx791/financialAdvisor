@@ -118,7 +118,7 @@ const ExplorePage: FC = (): ReactElement => {
             { data.length !== 0 ? (
             <Plot
                 data={[{
-                    x: data.map(itm => itm.volatility),
+                    x: data.map(itm => itm.lossRate),
                     y: data.map(itm => itm.mean_return),
                     type: 'scatter',
                     mode: 'markers',
@@ -131,7 +131,7 @@ const ExplorePage: FC = (): ReactElement => {
                 }]}
                 layout={{
                     width: Math.min(1000, Math.floor(window.innerWidth*0.9)), height: 500, title: 'Diagramme risk/return',
-                    xaxis: {title: "Volatilité %"},
+                    xaxis: {title: "Loss rate %"},
                     yaxis: {title: "Rendement moyen annualisé %"},
                 }}
                 onClick={(event) => setSelectedInstruement(data[event.points[0].pointIndex])}

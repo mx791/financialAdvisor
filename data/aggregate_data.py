@@ -73,7 +73,7 @@ if __name__ == "__main__":
     MIN_YEAR = 2022
     START_YEAR = 2014
     CURRENT_YEAR = 2024
-    mean_returns, stds = {i: [] for i in range(2014, MIN_YEAR)}, {i: [] for i in range(2014, MIN_YEAR)}
+    mean_returns, stds, percent_loss = {i: [] for i in range(2014, MIN_YEAR)}, {i: [] for i in range(2014, MIN_YEAR)}, {i: [] for i in range(2014, MIN_YEAR)}
     correlations = {index: [] for index in indexes_data}
 
     for i in tqdm(range(len(df))):
@@ -116,6 +116,7 @@ if __name__ == "__main__":
             if year < first_year:
                 mean_returns[year].append(0)
                 stds[year].append(0)
+                percent_loss[year].append(0)
 
             else:
                 data_year_filtered = data[data["date"].dt.year >= year]
@@ -126,6 +127,7 @@ if __name__ == "__main__":
                 returns = get_returns(data_year_filtered["close"].values, records_per_years)
                 mean_returns[year].append(np.mean(returns))
                 stds[year].append(np.std(returns))
+                percent_loss[year].append(len(returns[returns >= 1.0]))
     
     obj = {
         "name": names,
@@ -136,6 +138,7 @@ if __name__ == "__main__":
         "volumme": mean_volumme,
         **{f"return_{col}": mean_returns[col] for col in mean_returns},
         **{f"vol_{col}": stds[col] for col in stds},
+        **{f"loss_{col}": percent_loss[col] for col in percent_loss},
         **{f"correlation_{col}": correlations[col] for col in correlations},
     }
     aggregated = pd.DataFrame(obj).dropna()
