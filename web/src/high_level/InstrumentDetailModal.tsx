@@ -4,7 +4,7 @@ import Plot from 'react-plotly.js';
 import Constants from '../Constants';
 import Modal from '../components/Modal';
 import Portefeuille from '../data/Portefeuille';
-import Button, { SmallButton } from '../components/Button';
+import { SmallButton } from '../components/Button';
 
 
 interface InstrumentDetailModalProps {

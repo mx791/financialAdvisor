@@ -77,7 +77,7 @@ if __name__ == "__main__":
     correlations = {index: [] for index in indexes_data}
 
     for i in tqdm(range(len(df))):
-    #for i in tqdm(range(10)):
+    #for i in tqdm(range(200)):
         name = df["name"].values[i]
         ids = df["link"].values[i]
 
@@ -120,9 +120,10 @@ if __name__ == "__main__":
 
             else:
                 data_year_filtered = data[data["date"].dt.year >= year]
-                if len(data_year_filtered) == 0:
+                if len(data_year_filtered) <= records_per_years:
                     mean_returns[year].append(0)
                     stds[year].append(0)
+                    percent_loss[year].append(0)
                     continue
                 returns = get_returns(data_year_filtered["close"].values, records_per_years)
                 mean_returns[year].append(np.mean(returns))
