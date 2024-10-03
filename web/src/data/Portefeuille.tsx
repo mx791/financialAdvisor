@@ -95,7 +95,6 @@ class Portefeuille {
         for (let i=0; i<longest.length; i++) {
             let value = 0.0;
             let currentDate = longest[i];
-            for (let i)
         }
     }
 }
