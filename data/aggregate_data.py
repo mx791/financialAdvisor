@@ -125,10 +125,11 @@ if __name__ == "__main__":
                     stds[year].append(0)
                     percent_loss[year].append(0)
                     continue
+                    
                 returns = get_returns(data_year_filtered["close"].values, records_per_years)
                 mean_returns[year].append(np.mean(returns))
                 stds[year].append(np.std(returns))
-                percent_loss[year].append(len(returns[returns >= 1.0]))
+                percent_loss[year].append(np.mean(returns >= 1.0))
     
     obj = {
         "name": names,
