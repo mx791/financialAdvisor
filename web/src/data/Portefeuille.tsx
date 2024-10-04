@@ -96,9 +96,9 @@ class Portefeuille {
             let currentDate = longest[i];
             let valueOk = true;
             for (let e=0; e<this.lines.length; e++) {
-                const index = longest.length - i;
-                if (this.historical_data[this.lines[e].id as string].length >= index) {
-                    value += this.historical_data[this.lines[e].id as string][index].value;
+                const index = this.historical_data[this.lines[e].id as string].length - i;
+                if (index >= 0) {
+                    value += this.historical_data[this.lines[e].id as string][index].value * this.lines[e].ponderation;
                 } else {
                     valueOk = false;
                 }
