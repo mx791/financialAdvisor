@@ -97,7 +97,7 @@ class Portefeuille {
             let valueOk = true;
             for (let e=0; e<this.lines.length; e++) {
                 const index = longest.length - i;
-                if (this.historical_data[e].length >= index) {
+                if (this.historical_data[this.lines[e].id as string].length >= index) {
                     value += this.historical_data[e][index].value;
                 } else {
                     valueOk = false;
