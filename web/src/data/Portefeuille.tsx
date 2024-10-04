@@ -4,7 +4,7 @@ interface Line {
     ponderation: number,
 }
 
-interface Record {
+export interface Record {
     date: String,
     value: number
 }
@@ -75,7 +75,7 @@ class Portefeuille {
         return out;
     }
 
-    public async simulatePortefeuille() {
+    public async simulatePortefeuille(): Promise<Record[]> {
         let longest: Record[] = [];
         for (let i=0; i<this.lines.length; i++) {
             if (typeof this.historical_data[this.lines[i].id as string] === "undefined") {
@@ -90,12 +90,24 @@ class Portefeuille {
                 }
             }
         }
-        const items = this.lines.map(i => i.id);
-        let createdData = [];
+        let createdData: Record[] = [];
         for (let i=0; i<longest.length; i++) {
             let value = 0.0;
             let currentDate = longest[i];
+            let valueOk = true;
+            for (let e=0; e<this.lines.length; e++) {
+                const index = longest.length - i;
+                if (this.historical_data[e].length >= index) {
+                    value += this.historical_data[e][index].value;
+                } else {
+                    valueOk = false;
+                }
+            }
+            if (valueOk) {
+                createdData.unshift({date: String(currentDate), value: value});
+            }
         }
+        return createdData;
     }
 }
 
